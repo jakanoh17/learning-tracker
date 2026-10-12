@@ -6,13 +6,13 @@ A single page React app for tracking weekly learning topics, set up as an [Nx](h
 
 ```bash
 # Install dependencies
-npm install
+pnpm install
 
 # Start the dev server on http://localhost:4200
-npx nx dev learning-tracker
+pnpm nx dev learning-tracker
 
 # Run unit tests, lint, typecheck, and build
-npx nx run-many -t test lint typecheck build
+pnpm nx run-many -t test lint typecheck build
 ```
 
 ## Project Structure
@@ -35,9 +35,9 @@ npx nx run-many -t test lint typecheck build
 ## Useful Commands
 
 ```bash
-npx nx show project learning-tracker --web   # See all available targets
-npx nx test learning-tracker                 # Run unit tests
-npx nx build learning-tracker                # Production build into packages/app/dist
-npx nx preview learning-tracker              # Serve the production build
-npx nx g @nx/react:component src/app/my-component --project=learning-tracker
+pnpm nx show project learning-tracker --web   # See all available targets
+pnpm nx test learning-tracker                 # Run unit tests
+pnpm nx build learning-tracker                # Production build into packages/app/dist
+pnpm nx preview learning-tracker              # Serve the production build
+pnpm nx g @nx/react:component src/app/my-component --project=learning-tracker
 ```
