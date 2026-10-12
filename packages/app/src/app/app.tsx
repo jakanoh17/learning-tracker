@@ -20,7 +20,7 @@ import {
 export default function App() {
   const [active, setActive] = useState('tab1');
 
-  const handleClick = (value) => {
+  const handleClick = (value: string) => {
     if (value === active) {
       return;
     }
@@ -33,42 +33,42 @@ export default function App() {
       <MDBContainer className="py-5 h-100">
         <MDBRow className="d-flex justify-content-center align-items-center">
           <MDBCol xl="10">
-            <MDBCard>
+            <MDBCard className="mask-custom">
               <MDBCardBody className="p-5">
-                <div className="d-flex justify-content-center align-items-center mb-4">
-                  <MDBInput
-                    type="text"
-                    id="form1"
-                    label="New task..."
-                    wrapperClass="flex-fill"
+                <div className="text-center pt-3 pb-2">
+                  <img
+                    src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-todo-list/check1.webp"
+                    alt="Check"
+                    width="60"
                   />
-                  <MDBBtn type="submit" color="info" className="ms-2">
-                    Add
-                  </MDBBtn>
+                  <h2 className="my-4">Task List</h2>
                 </div>
                 <MDBTabs className="mb-4 pb-2">
+                  {/* Todo for the week */}
                   <MDBTabsItem>
                     <MDBTabsLink
                       onClick={() => handleClick('tab1')}
                       active={active === 'tab1'}
                     >
-                      All
+                      To do
                     </MDBTabsLink>
                   </MDBTabsItem>
+                  {/* In progress for the week */}
                   <MDBTabsItem>
                     <MDBTabsLink
                       onClick={() => handleClick('tab2')}
                       active={active === 'tab2'}
                     >
-                      Active
+                      In Progress
                     </MDBTabsLink>
                   </MDBTabsItem>
+                  {/* Done for all time */}
                   <MDBTabsItem>
                     <MDBTabsLink
                       onClick={() => handleClick('tab3')}
                       active={active === 'tab3'}
                     >
-                      Completed
+                      Done
                     </MDBTabsLink>
                   </MDBTabsItem>
                 </MDBTabs>
