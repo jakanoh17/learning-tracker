@@ -1,5 +1,5 @@
 import { MDBInput } from 'mdb-react-ui-kit';
-import { useDebounce } from './useDebouce';
+import { useDebounce } from './useDebounce';
 
 export default function SearchBox({value, setValue}: {value: string, setValue: React.Dispatch<React.SetStateAction<string>>}) {
   
