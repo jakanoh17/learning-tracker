@@ -13,7 +13,9 @@ import {
   MDBTabsLink,
   MDBTabsPane,
 } from 'mdb-react-ui-kit';
-import TaskItem from '../TaskItem/TaskItem';
+import TaskItem from '../TaskList/TaskItem/TaskItem';
+import { topics, Status } from '../utils/topics';
+import TaskList from '../TaskList/TaskList';
 
 export default function App() {
   const [active, setActive] = useState('tab1');
@@ -27,7 +29,7 @@ export default function App() {
   };
 
   return (
-    <section className="gradient-custom vh-100">
+    <section className="gradient-custom">
       <MDBContainer className="py-5 h-100">
         <MDBRow className="d-flex justify-content-center align-items-center">
           <MDBCol xl="10">
@@ -75,73 +77,23 @@ export default function App() {
                 </MDBTabs>
                 <MDBTabsContent>
                   <MDBTabsPane open={active === 'tab1'}>
-                    <MDBListGroup className="mb-0">
-                      <TaskItem >
-                        Dapibus ac facilisis in
-                      </TaskItem>
-                      <MDBListGroupItem
-                        className=" d-flex align-items-center border-0 mb-2 rounded"
-                        style={{ backgroundColor: '#f4f6f7' }}
-                      >
-                        Dapibus ac facilisis in
-                      </MDBListGroupItem>
-                      <MDBListGroupItem
-                        className=" d-flex align-items-center border-0 mb-2 rounded"
-                        style={{ backgroundColor: '#f4f6f7' }}
-                      >
-                        Morbi leo risus
-                      </MDBListGroupItem>
-                      <MDBListGroupItem
-                        className=" d-flex align-items-center border-0 mb-2 rounded"
-                        style={{ backgroundColor: '#f4f6f7' }}
-                      >
-                        Porta ac consectetur ac
-                      </MDBListGroupItem>
-                      <MDBListGroupItem
-                        className=" d-flex align-items-center border-0 mb-2 rounded"
-                        style={{ backgroundColor: '#f4f6f7' }}
-                      >
-                        Vestibulum at eros
-                      </MDBListGroupItem>
-                    </MDBListGroup>
+                    <TaskList
+                      tasks={topics.filter(
+                        (t) => t.status === Status.Todo && t.week === 1,
+                      )}
+                    />
                   </MDBTabsPane>
                   <MDBTabsPane open={active === 'tab2'}>
-                    <MDBListGroup className="mb-0">
-                      <MDBListGroupItem
-                        className=" d-flex align-items-center border-0 mb-2 rounded"
-                        style={{ backgroundColor: '#f4f6f7' }}
-                      >
-                        Morbi leo risus
-                      </MDBListGroupItem>
-                      <MDBListGroupItem
-                        className=" d-flex align-items-center border-0 mb-2 rounded"
-                        style={{ backgroundColor: '#f4f6f7' }}
-                      >
-                        Porta ac consectetur ac
-                      </MDBListGroupItem>
-                      <MDBListGroupItem
-                        className=" d-flex align-items-center border-0 mb-2 rounded"
-                        style={{ backgroundColor: '#f4f6f7' }}
-                      >
-                        Vestibulum at eros
-                      </MDBListGroupItem>
-                    </MDBListGroup>
+                    <TaskList
+                      tasks={topics.filter(
+                        (t) => t.status === Status.InProgress && t.week === 1,
+                      )}
+                    />
                   </MDBTabsPane>
                   <MDBTabsPane open={active === 'tab3'}>
-                    <MDBListGroup className="mb-0">
-                      <MDBListGroupItem
-                        className=" d-flex align-items-center border-0 mb-2 rounded"
-                        style={{ backgroundColor: '#f4f6f7' }}
-                      >
-                        <s>Cras justo odio</s>
-                      </MDBListGroupItem>
-                      <MDBListGroupItem
-                        className=" d-flex align-items-center border-0 mb-2 rounded"
-                        style={{ backgroundColor: '#f4f6f7' }}
-                      >
-                        <s>Dapibus ac facilisis in</s>
-                      </MDBListGroupItem>
-                    </MDBListGroup>
+                    <TaskList
+                      tasks={topics.filter((t) => t.status === Status.Done)}
+                    />
                   </MDBTabsPane>
                 </MDBTabsContent>
               </MDBCardBody>

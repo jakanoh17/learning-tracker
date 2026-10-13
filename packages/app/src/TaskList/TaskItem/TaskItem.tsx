@@ -1,6 +1,7 @@
 import { MDBListGroupItem } from 'mdb-react-ui-kit';
+import type { ReactNode } from 'react';
 
-export default function TaskItem({ children }: { children: React.ReactNode }) {
+export default function TaskItem({ children }: { children: ReactNode }) {
   return (
     <MDBListGroupItem
       className=" d-flex align-items-center border-0 mb-2 rounded"
