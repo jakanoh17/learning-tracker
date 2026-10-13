@@ -3,7 +3,6 @@ import {
   MDBBtn,
   MDBCard,
   MDBCardBody,
-  MDBCheckbox,
   MDBCol,
   MDBContainer,
   MDBInput,
@@ -51,6 +50,7 @@ export default function App() {
                       active={active === 'tab1'}
                     >
                       To do
+                      <p>for the week</p>
                     </MDBTabsLink>
                   </MDBTabsItem>
                   {/* In progress for the week */}
@@ -60,6 +60,7 @@ export default function App() {
                       active={active === 'tab2'}
                     >
                       In Progress
+                      <p>for the week</p>
                     </MDBTabsLink>
                   </MDBTabsItem>
                   {/* Done for all time */}
@@ -69,6 +70,7 @@ export default function App() {
                       active={active === 'tab3'}
                     >
                       Done
+                      <p>all time</p>
                     </MDBTabsLink>
                   </MDBTabsItem>
                 </MDBTabs>
@@ -79,67 +81,30 @@ export default function App() {
                         className=" d-flex align-items-center border-0 mb-2 rounded"
                         style={{ backgroundColor: '#f4f6f7' }}
                       >
-                        {' '}
-                        <MDBCheckbox
-                          name="flexCheck"
-                          value=""
-                          id="flexCheck"
-                          className="me-3"
-                          defaultChecked
-                        />
-                        <s>Cras justo odio</s>
+                        Cras justo odio
                       </MDBListGroupItem>
                       <MDBListGroupItem
                         className=" d-flex align-items-center border-0 mb-2 rounded"
                         style={{ backgroundColor: '#f4f6f7' }}
                       >
-                        {' '}
-                        <MDBCheckbox
-                          name="flexCheck"
-                          value=""
-                          id="flexCheck"
-                          className="me-3"
-                          defaultChecked
-                        />
-                        <s>Dapibus ac facilisis in</s>
+                        Dapibus ac facilisis in
                       </MDBListGroupItem>
                       <MDBListGroupItem
                         className=" d-flex align-items-center border-0 mb-2 rounded"
                         style={{ backgroundColor: '#f4f6f7' }}
                       >
-                        {' '}
-                        <MDBCheckbox
-                          name="flexCheck"
-                          value=""
-                          id="flexCheck"
-                          className="me-3"
-                        />
                         Morbi leo risus
                       </MDBListGroupItem>
                       <MDBListGroupItem
                         className=" d-flex align-items-center border-0 mb-2 rounded"
                         style={{ backgroundColor: '#f4f6f7' }}
                       >
-                        {' '}
-                        <MDBCheckbox
-                          name="flexCheck"
-                          value=""
-                          id="flexCheck"
-                          className="me-3"
-                        />
                         Porta ac consectetur ac
                       </MDBListGroupItem>
                       <MDBListGroupItem
                         className=" d-flex align-items-center border-0 mb-2 rounded"
                         style={{ backgroundColor: '#f4f6f7' }}
                       >
-                        {' '}
-                        <MDBCheckbox
-                          name="flexCheck"
-                          value=""
-                          id="flexCheck"
-                          className="me-3"
-                        />
                         Vestibulum at eros
                       </MDBListGroupItem>
                     </MDBListGroup>
@@ -150,39 +115,18 @@ export default function App() {
                         className=" d-flex align-items-center border-0 mb-2 rounded"
                         style={{ backgroundColor: '#f4f6f7' }}
                       >
-                        {' '}
-                        <MDBCheckbox
-                          name="flexCheck"
-                          value=""
-                          id="flexCheck"
-                          className="me-3"
-                        />
                         Morbi leo risus
                       </MDBListGroupItem>
                       <MDBListGroupItem
                         className=" d-flex align-items-center border-0 mb-2 rounded"
                         style={{ backgroundColor: '#f4f6f7' }}
                       >
-                        {' '}
-                        <MDBCheckbox
-                          name="flexCheck"
-                          value=""
-                          id="flexCheck"
-                          className="me-3"
-                        />
                         Porta ac consectetur ac
                       </MDBListGroupItem>
                       <MDBListGroupItem
                         className=" d-flex align-items-center border-0 mb-2 rounded"
                         style={{ backgroundColor: '#f4f6f7' }}
                       >
-                        {' '}
-                        <MDBCheckbox
-                          name="flexCheck"
-                          value=""
-                          id="flexCheck"
-                          className="me-3"
-                        />
                         Vestibulum at eros
                       </MDBListGroupItem>
                     </MDBListGroup>
@@ -193,28 +137,12 @@ export default function App() {
                         className=" d-flex align-items-center border-0 mb-2 rounded"
                         style={{ backgroundColor: '#f4f6f7' }}
                       >
-                        {' '}
-                        <MDBCheckbox
-                          name="flexCheck"
-                          value=""
-                          id="flexCheck"
-                          className="me-3"
-                          defaultChecked
-                        />
                         <s>Cras justo odio</s>
                       </MDBListGroupItem>
                       <MDBListGroupItem
                         className=" d-flex align-items-center border-0 mb-2 rounded"
                         style={{ backgroundColor: '#f4f6f7' }}
                       >
-                        {' '}
-                        <MDBCheckbox
-                          name="flexCheck"
-                          value=""
-                          id="flexCheck"
-                          className="me-3"
-                          defaultChecked
-                        />
                         <s>Dapibus ac facilisis in</s>
                       </MDBListGroupItem>
                     </MDBListGroup>
