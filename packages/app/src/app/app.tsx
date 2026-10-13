@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 import {
-  MDBBtn,
   MDBCard,
   MDBCardBody,
   MDBCol,
   MDBContainer,
-  MDBInput,
   MDBListGroup,
   MDBListGroupItem,
   MDBRow,
@@ -15,6 +13,7 @@ import {
   MDBTabsLink,
   MDBTabsPane,
 } from 'mdb-react-ui-kit';
+import TaskItem from '../TaskItem/TaskItem';
 
 export default function App() {
   const [active, setActive] = useState('tab1');
@@ -77,12 +76,9 @@ export default function App() {
                 <MDBTabsContent>
                   <MDBTabsPane open={active === 'tab1'}>
                     <MDBListGroup className="mb-0">
-                      <MDBListGroupItem
-                        className=" d-flex align-items-center border-0 mb-2 rounded"
-                        style={{ backgroundColor: '#f4f6f7' }}
-                      >
-                        Cras justo odio
-                      </MDBListGroupItem>
+                      <TaskItem >
+                        Dapibus ac facilisis in
+                      </TaskItem>
                       <MDBListGroupItem
                         className=" d-flex align-items-center border-0 mb-2 rounded"
                         style={{ backgroundColor: '#f4f6f7' }}
