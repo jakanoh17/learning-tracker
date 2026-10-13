@@ -29,3 +29,7 @@ p {
   background-clip: padding-box;
   box-shadow: 0 16px 40px rgba(90, 70, 140, 0.14);
 }
+
+.text-xs {
+  font-size: 0.75rem;
+}
