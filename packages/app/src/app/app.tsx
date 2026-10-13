@@ -23,7 +23,7 @@ import TabFilterContext, {
 } from '../utils/TabFilterContext';
 
 export default function App() {
-  const [active, setActive] = useState('tab1');
+  const [active, setActive] = useState<ActiveTabType>(ActiveTab.tab1);
   const [searchBoxValue, setSearchBoxValue] = useState('');
   const [storedTopics, setStoredTopics] = useLocalStorage<TopicType[]>(
     'myKey',
@@ -33,11 +33,11 @@ export default function App() {
   return (
     <TabFilterContext
       value={{
-        activeTab: active as ActiveTabType,
-        setActiveTab: setActive as any,
+        activeTab: active,
+        setActiveTab: setActive,
       }}
     >
-      <section className="gradient-custom">
+      <section className="gradient-custom min-vh-100">
         <MDBContainer className="py-5 h-100">
           <MDBRow className="d-flex justify-content-center align-items-center">
             <MDBCol xl="10">
