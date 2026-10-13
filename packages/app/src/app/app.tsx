@@ -14,9 +14,11 @@ import {
 import { topics, Status } from '../utils/topics';
 import TaskList from '../TaskList/TaskList';
 import SearchBox from '../SearchBox/SearchBox';
+import returnFilteredTasks from '../utils/returnFilteredTasks';
 
 export default function App() {
   const [active, setActive] = useState('tab1');
+  const [searchBoxValue, setSearchBoxValue] = useState('');
 
   const handleClick = (value: string) => {
     if (value === active) {
@@ -41,7 +43,10 @@ export default function App() {
                   />
                   <h2 className="my-4">Task List</h2>
                 </div>
-                <SearchBox />
+                <SearchBox
+                  value={searchBoxValue}
+                  setValue={setSearchBoxValue}
+                />
                 <MDBTabs className="mb-4 pb-2">
                   {/* Todo for the week */}
                   <MDBTabsItem>
@@ -77,21 +82,23 @@ export default function App() {
                 <MDBTabsContent>
                   <MDBTabsPane open={active === 'tab1'}>
                     <TaskList
-                      tasks={topics.filter(
+                      tasks={returnFilteredTasks(topics, searchBoxValue).filter(
                         (t) => t.status === Status.Todo && t.week === 1,
                       )}
                     />
                   </MDBTabsPane>
                   <MDBTabsPane open={active === 'tab2'}>
                     <TaskList
-                      tasks={topics.filter(
+                      tasks={returnFilteredTasks(topics, searchBoxValue).filter(
                         (t) => t.status === Status.InProgress && t.week === 1,
                       )}
                     />
                   </MDBTabsPane>
                   <MDBTabsPane open={active === 'tab3'}>
                     <TaskList
-                      tasks={topics.filter((t) => t.status === Status.Done)}
+                      tasks={returnFilteredTasks(topics, searchBoxValue).filter(
+                        (t) => t.status === Status.Done,
+                      )}
                     />
                   </MDBTabsPane>
                 </MDBTabsContent>

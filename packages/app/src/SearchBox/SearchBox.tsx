@@ -1,9 +1,8 @@
-import { useState } from 'react';
 import { MDBInput } from 'mdb-react-ui-kit';
 import { useDebounce } from './useDebouce';
 
-export default function SearchBox() {
-  const [value, setValue] = useState('');
+export default function SearchBox({value, setValue}: {value: string, setValue: React.Dispatch<React.SetStateAction<string>>}) {
+  
 
   return (
     <div className="p-4">
