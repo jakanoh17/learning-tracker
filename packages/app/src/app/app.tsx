@@ -11,7 +11,8 @@ import {
   MDBTabsLink,
   MDBTabsPane,
 } from 'mdb-react-ui-kit';
-import { topics, Status } from '../utils/topics';
+import { topics, Status, type TopicType } from '../utils/topics';
+import { useLocalStorage } from '../utils/useLocalStorage';
 import TaskList from '../TaskList/TaskList';
 import SearchBox from '../SearchBox/SearchBox';
 import returnFilteredTasks from '../utils/returnFilteredTasks';
@@ -19,6 +20,12 @@ import returnFilteredTasks from '../utils/returnFilteredTasks';
 export default function App() {
   const [active, setActive] = useState('tab1');
   const [searchBoxValue, setSearchBoxValue] = useState('');
+  const [storedTopics, setStoredTopics] = useLocalStorage<TopicType[]>(
+    'myKey',
+    topics,
+  );
+
+  console.log('storedValue: ', storedTopics);
 
   const handleClick = (value: string) => {
     if (value === active) {
@@ -82,23 +89,28 @@ export default function App() {
                 <MDBTabsContent>
                   <MDBTabsPane open={active === 'tab1'}>
                     <TaskList
-                      tasks={returnFilteredTasks(topics, searchBoxValue).filter(
-                        (t) => t.status === Status.Todo && t.week === 1,
-                      )}
+                      tasks={returnFilteredTasks(
+                        storedTopics,
+                        searchBoxValue,
+                      ).filter((t) => t.status === Status.Todo && t.week === 1)}
                     />
                   </MDBTabsPane>
                   <MDBTabsPane open={active === 'tab2'}>
                     <TaskList
-                      tasks={returnFilteredTasks(topics, searchBoxValue).filter(
+                      tasks={returnFilteredTasks(
+                        storedTopics,
+                        searchBoxValue,
+                      ).filter(
                         (t) => t.status === Status.InProgress && t.week === 1,
                       )}
                     />
                   </MDBTabsPane>
                   <MDBTabsPane open={active === 'tab3'}>
                     <TaskList
-                      tasks={returnFilteredTasks(topics, searchBoxValue).filter(
-                        (t) => t.status === Status.Done,
-                      )}
+                      tasks={returnFilteredTasks(
+                        storedTopics,
+                        searchBoxValue,
+                      ).filter((t) => t.status === Status.Done)}
                     />
                   </MDBTabsPane>
                 </MDBTabsContent>

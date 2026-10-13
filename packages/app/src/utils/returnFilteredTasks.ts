@@ -4,6 +4,11 @@ export default function returnFilteredTasks(
   tasks: TopicType[],
   searchValue: string,
 ): TopicType[] {
+  if (!tasks || !Array.isArray(tasks)) {
+    console.error('Invalid tasks array:', tasks);
+    return [];
+  }
+
   if (!searchValue) {
     return tasks;
   }
