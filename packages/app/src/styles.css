@@ -13,14 +13,14 @@ body {
 }
 
 .gradient-custom {
-  background: linear-gradient(135deg, #5b7cfa 0%, #7fb3f5 55%, #a8e0f0 100%);
+  background: linear-gradient(135deg, #a6c1ee 0%, #c9b8f0 50%, #fcd4ef 100%);
 }
 
 .mask-custom {
-  background: rgba(255, 255, 255, 0.28);
+  background: rgba(255, 255, 255, 0.4);
   border-radius: 2em;
   backdrop-filter: blur(25px);
-  border: 1px solid rgba(255, 255, 255, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.6);
   background-clip: padding-box;
-  box-shadow: 0 20px 40px rgba(25, 40, 110, 0.18);
+  box-shadow: 0 16px 40px rgba(90, 70, 140, 0.14);
 }
