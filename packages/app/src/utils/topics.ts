@@ -5,13 +5,13 @@ export const Status = {
 } as const;
 
 type StatusType = (typeof Status)[keyof typeof Status];
-export type TopicType={
+export type TopicType = {
   id: number;
   title: string;
   week: number | Date | string;
   status: StatusType;
   notes: string;
-}
+};
 
 export const topics: TopicType[] = [
   // TEMPLATE:
@@ -174,5 +174,13 @@ export const topics: TopicType[] = [
     week: 4,
     status: Status.Todo,
     notes: '',
+  },
+  {
+    id: 21,
+    title: 'Week 1 - Demo project',
+    week: 1,
+    status: Status.Done,
+    notes:
+      'Broke it a lot along the way. Mapping out your variables really is a lot to consider. Removed the key from a React list and saw that it still rendered just with some errors.',
   },
 ];
