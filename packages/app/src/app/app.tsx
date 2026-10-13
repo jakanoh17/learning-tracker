@@ -4,8 +4,6 @@ import {
   MDBCardBody,
   MDBCol,
   MDBContainer,
-  MDBListGroup,
-  MDBListGroupItem,
   MDBRow,
   MDBTabs,
   MDBTabsContent,
@@ -13,9 +11,9 @@ import {
   MDBTabsLink,
   MDBTabsPane,
 } from 'mdb-react-ui-kit';
-import TaskItem from '../TaskList/TaskItem/TaskItem';
 import { topics, Status } from '../utils/topics';
 import TaskList from '../TaskList/TaskList';
+import SearchBox from '../SearchBox/SearchBox';
 
 export default function App() {
   const [active, setActive] = useState('tab1');
@@ -43,6 +41,7 @@ export default function App() {
                   />
                   <h2 className="my-4">Task List</h2>
                 </div>
+                <SearchBox />
                 <MDBTabs className="mb-4 pb-2">
                   {/* Todo for the week */}
                   <MDBTabsItem>
