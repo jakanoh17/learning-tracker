@@ -74,15 +74,17 @@ export const topics: TopicType[] = [
     id: 6,
     title: 'Compound components, controlled vs. uncontrolled',
     week: 2,
-    status: Status.Todo,
-    notes: '',
+    status: Status.Done,
+    notes:
+      'Learned about breaking components into composable parts like Metric. This is useful for components you want to use again with slight tweaks and here and there. Also learned about lifting state up when the logic calls for it',
   },
   {
     id: 7,
     title: 'Error boundaries',
     week: 2,
-    status: Status.Todo,
-    notes: '',
+    status: Status.Done,
+    notes:
+      'Use the react-error-boundary package to catch and handle errors in your component tree. It has some criteria for which errors it handles and suggests usetransition instead for async and event handler fxns. READme is very easy to read.',
   },
   {
     id: 8,

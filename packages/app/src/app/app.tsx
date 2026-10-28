@@ -22,6 +22,8 @@ import TabFilterContext, {
   type ActiveTabType,
 } from '../utils/TabFilterContext';
 
+const CURRENT_WEEK = 2;
+
 export default function App() {
   const [active, setActive] = useState<ActiveTabType>(ActiveTab.tab1);
   const [searchBoxValue, setSearchBoxValue] = useState('');
@@ -63,7 +65,8 @@ export default function App() {
                           storedTopics,
                           searchBoxValue,
                         ).filter(
-                          (t) => t.status === Status.Todo && t.week === 1,
+                          (t) =>
+                            t.status === Status.Todo && t.week === CURRENT_WEEK,
                         )}
                       />
                     </MDBTabsPane>
@@ -73,16 +76,37 @@ export default function App() {
                           storedTopics,
                           searchBoxValue,
                         ).filter(
-                          (t) => t.status === Status.InProgress && t.week === 1,
+                          (t) =>
+                            t.status === Status.InProgress &&
+                            t.week === CURRENT_WEEK,
                         )}
                       />
                     </MDBTabsPane>
                     <MDBTabsPane open={active === ActiveTab.tab3}>
+                      <p className="mb-3 fs-6 fw-bold text-uppercase">
+                        For the week
+                      </p>
                       <TaskList
                         tasks={returnFilteredTasks(
                           storedTopics,
                           searchBoxValue,
-                        ).filter((t) => t.status === Status.Done)}
+                        ).filter(
+                          (t) =>
+                            t.status === Status.Done && t.week === CURRENT_WEEK,
+                        )}
+                      />
+                      <hr className="hr hr-blurry" />
+                      <p className="mb-3 fs-6 fw-bold text-uppercase">
+                        Past weeks
+                      </p>
+                      <TaskList
+                        tasks={returnFilteredTasks(
+                          storedTopics,
+                          searchBoxValue,
+                        ).filter(
+                          (t) =>
+                            t.status === Status.Done && t.week !== CURRENT_WEEK,
+                        )}
                       />
                     </MDBTabsPane>
                   </MDBTabsContent>
