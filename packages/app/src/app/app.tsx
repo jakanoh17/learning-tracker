@@ -32,6 +32,12 @@ export default function App() {
     topics,
   );
 
+  const weekTopics = storedTopics.filter((t) => t.week === CURRENT_WEEK);
+  const doneThisWeek = weekTopics.filter((t) => t.status === Status.Done);
+  const progress = weekTopics.length
+    ? Math.round((doneThisWeek.length / weekTopics.length) * 100)
+    : 0;
+
   return (
     <TabFilterContext
       value={{
@@ -58,6 +64,21 @@ export default function App() {
                     setValue={setSearchBoxValue}
                   />
                   <Tabs />
+                  <div
+                    className="progress progress-custom mb-4"
+                    style={{ height: '18px' }}
+                  >
+                    <div
+                      className="progress-bar progress-bar-custom"
+                      style={{ width: `${progress}%` }}
+                      role="progressbar"
+                      aria-valuenow={progress}
+                      aria-valuemin={0}
+                      aria-valuemax={100}
+                    >
+                      {progress}%
+                    </div>
+                  </div>
                   <MDBTabsContent>
                     <MDBTabsPane open={active === ActiveTab.tab1}>
                       <TaskList
