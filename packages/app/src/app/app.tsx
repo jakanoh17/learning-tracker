@@ -1,17 +1,14 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import {
   MDBCard,
   MDBCardBody,
   MDBCol,
   MDBContainer,
   MDBRow,
-  MDBTabs,
   MDBTabsContent,
-  MDBTabsItem,
-  MDBTabsLink,
   MDBTabsPane,
 } from 'mdb-react-ui-kit';
-import { topics, Status, type TopicType } from '../utils/topics';
+import { Status, type TopicType } from '../utils/topics';
 import { useLocalStorage } from '../utils/useLocalStorage';
 import TaskList from '../TaskList/TaskList';
 import SearchBox from '../SearchBox/SearchBox';
@@ -22,13 +19,14 @@ import TabFilterContext, {
   type ActiveTabType,
 } from '../utils/TabFilterContext';
 
+import { useTopics } from '../utils/useTopics';
+
 export default function App() {
   const [active, setActive] = useState<ActiveTabType>(ActiveTab.tab1);
   const [searchBoxValue, setSearchBoxValue] = useState('');
-  const [storedTopics, setStoredTopics] = useLocalStorage<TopicType[]>(
-    'myKey',
-    topics,
-  );
+
+  const { data: topicsData } = useTopics();
+  const [storedTopics] = useLocalStorage<TopicType[]>('myKey', topicsData || []);
 
   return (
     <TabFilterContext

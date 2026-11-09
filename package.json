@@ -6,6 +6,7 @@
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-free": "^7.3.1",
+    "@tanstack/react-query": "^5.107.1",
     "mdb-react-ui-kit": "^10.0.0",
     "react": "19.0.0",
     "react-dom": "19.0.0"
@@ -44,6 +45,7 @@
     "eslint-plugin-react-hooks": "5.0.0",
     "jiti": "2.4.2",
     "jsdom": "~22.1.0",
+    "json-server": "1.0.0-beta.15",
     "jsonc-eslint-parser": "^2.1.0",
     "nx": "23.2.0",
     "prettier": "^3.8.1",
