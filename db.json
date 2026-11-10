@@ -1,6 +1,6 @@
 {
   "currentWeek": {
-    "currentWeek": 4
+    "currentWeek": 2
   },
   "topics": [
     {
@@ -49,43 +49,43 @@
       "id": "6",
       "title": "Compound components, controlled vs. uncontrolled",
       "week": 2,
-      "status": "TODO",
-      "notes": ""
+      "status": "DONE",
+      "notes": "Compound components are a pattern where you have a Parent component and children like Parent.Header and Parent.Body. The children can access the parent's state and methods via context, so you can have a more flexible and reusable component. Controlled components are components that have their state controlled by the parent via props, while uncontrolled components manage their own state internally. Controlled components are more predictable and easier to test, while uncontrolled components are simpler to use and require less boilerplate code."
     },
     {
       "id": "7",
       "title": "Error boundaries",
       "week": 2,
-      "status": "TODO",
-      "notes": ""
+      "status": "DONE",
+      "notes": "Error boundaries are React components that catch JavaScript errors in their child component tree, log those errors, and display a fallback UI instead of the component that crashed. They help prevent the entire app from crashing when an error occurs in a single component."
     },
     {
       "id": "8",
       "title": "Suspense and code splitting",
       "week": 2,
-      "status": "TODO",
-      "notes": ""
+      "status": "DONE",
+      "notes": "Suspense allows you to display a loading spinner while waiting for data to load, and code splitting allows you to split your code into smaller chunks that can be loaded on demand."
     },
     {
       "id": "9",
       "title": "Server data with TanStack Query",
       "week": 2,
-      "status": "TODO",
-      "notes": ""
+      "status": "DONE",
+      "notes": "Introduction to TanStack, which is a library for managing server state in React. It provides hooks for fetching, caching, and updating data from a server, and it integrates well with React's state management."
     },
     {
       "id": "10",
       "title": "Choosing where state lives",
       "week": 2,
-      "status": "TODO",
-      "notes": ""
+      "status": "DONE",
+      "notes": "Choosing where state lives is a crucial decision in React development. State should be placed in the component that needs it most, or in a shared context if multiple components need access to it. Try to keep it as low level as possible to avoid complicated state management and unnecessary re-renders."
     },
     {
       "id": "11",
       "title": "Finding slow components",
       "week": 2,
-      "status": "TODO",
-      "notes": ""
+      "status": "DONE",
+      "notes": "Finding slow components is an important part of performance optimization. You can use React DevTools to identify components that are taking a long time to render or update. Once identified, you can optimize these components by memoizing expensive calculations, breaking them down into smaller pieces, or using techniques like code splitting."
     },
     {
       "id": "12",
