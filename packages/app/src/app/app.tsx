@@ -21,6 +21,7 @@ import TabFilterContext, {
   type ActiveTabType,
 } from '../utils/hooks/TabFilterContext';
 import HeaderDropdown from '../components/HeaderDropdown';
+import SimulateErrorButton from '../components/SimulateErrorButton';
 
 import { useTopicsContext } from '../utils/hooks/TopicsContext';
 
@@ -143,6 +144,7 @@ export default function App() {
                           />
                         </MDBTabsPane>
                       </MDBTabsContent>
+                      <SimulateErrorButton />
                     </>
                   )}
                 </MDBCardBody>
