@@ -4,7 +4,7 @@ export const Status = {
   Done: 'DONE',
 } as const;
 
-type StatusType = (typeof Status)[keyof typeof Status];
+export type StatusType = (typeof Status)[keyof typeof Status];
 export type TopicType = {
   id: string;
   title: string;
