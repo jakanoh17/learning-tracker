@@ -2,7 +2,7 @@ import type { TopicType } from '../utils/topics';
 
 export default function returnFilteredTasks(
   tasks: TopicType[],
-  searchValue: string,
+  searchValue?: string,
 ): TopicType[] {
   if (!tasks || !Array.isArray(tasks)) {
     console.error('Invalid tasks array:', tasks);

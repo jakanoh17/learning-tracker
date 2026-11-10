@@ -1,7 +1,7 @@
 import { MDBTabs, MDBTabsItem, MDBTabsLink } from 'mdb-react-ui-kit';
 import { useContext } from 'react';
-import TabFilterContext from '../utils/TabFilterContext';
-import { ActiveTab, type ActiveTabType } from '../utils/TabFilterContext';
+import TabFilterContext from '../utils/hooks/TabFilterContext';
+import { ActiveTab, type ActiveTabType } from '../utils/hooks/TabFilterContext';
 
 export default function Tabs() {
   const { activeTab, setActiveTab } = useContext(TabFilterContext);
@@ -40,6 +40,15 @@ export default function Tabs() {
         <MDBTabsLink
           onClick={() => handleClick(ActiveTab.tab3)}
           active={activeTab === ActiveTab.tab3}
+        >
+          Done
+          <p>for the week</p>
+        </MDBTabsLink>
+      </MDBTabsItem>
+      <MDBTabsItem>
+        <MDBTabsLink
+          onClick={() => handleClick(ActiveTab.tab4)}
+          active={activeTab === ActiveTab.tab4}
         >
           Done
           <p>all time</p>

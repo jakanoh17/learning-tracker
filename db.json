@@ -1,4 +1,7 @@
 {
+  "currentWeek": {
+    "currentWeek": 2
+  },
   "topics": [
     {
       "id": "0",
@@ -11,7 +14,7 @@
       "id": "1",
       "title": "Effects, and when not to use them",
       "week": 1,
-      "status": "TODO",
+      "status": "DONE",
       "notes": "Only watched the video and not the reading. Still learned that useEffects should not be a go to for everything. They should be used when you need to do something after a render, like fetching data or updating the DOM. If you can do it during render, then do it during render like event-specific logic."
     },
     {

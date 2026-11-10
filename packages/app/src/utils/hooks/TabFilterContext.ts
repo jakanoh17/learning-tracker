@@ -4,6 +4,7 @@ export const ActiveTab = {
   tab1: 'TAB1',
   tab2: 'TAB2',
   tab3: 'TAB3',
+  tab4: 'TAB4',
 } as const;
 
 export type ActiveTabType = (typeof ActiveTab)[keyof typeof ActiveTab];

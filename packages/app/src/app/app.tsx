@@ -9,20 +9,23 @@ import {
   MDBTabsPane,
 } from 'mdb-react-ui-kit';
 import { Status } from '../utils/topics';
-import TaskList from '../TaskList/TaskList';
-import SearchBox from '../SearchBox/SearchBox';
+import TaskList from '../components/TaskList/TaskList';
+import SearchBox from '../components/SearchBox/SearchBox';
 import returnFilteredTasks from '../utils/returnFilteredTasks';
-import Tabs from '../Tabs/Tabs';
+import Tabs from '../components/Tabs';
 import TabFilterContext, {
   ActiveTab,
   type ActiveTabType,
-} from '../utils/TabFilterContext';
+} from '../utils/hooks/TabFilterContext';
+import HeaderDropdown from '../components/HeaderDropdown';
+
 import { useTopicsContext } from '../utils/hooks/TopicsContext';
 
 export default function App() {
   const [active, setActive] = useState<ActiveTabType>(ActiveTab.tab1);
   const [searchBoxValue, setSearchBoxValue] = useState('');
-  const { topics } = useTopicsContext();
+  const { topics, currentWeek
+   } = useTopicsContext();
 
   return (
     <TabFilterContext
@@ -44,6 +47,7 @@ export default function App() {
                       width="60"
                     />
                     <h2 className="my-4">Task List</h2>
+                    <HeaderDropdown />
                   </div>
                   <SearchBox
                     value={searchBoxValue}
@@ -57,7 +61,8 @@ export default function App() {
                           topics,
                           searchBoxValue,
                         ).filter(
-                          (t) => t.status === Status.Todo && t.week === 1,
+                          (t) =>
+                            t.status === Status.Todo && t.week === currentWeek,
                         )}
                       />
                     </MDBTabsPane>
@@ -67,11 +72,24 @@ export default function App() {
                           topics,
                           searchBoxValue,
                         ).filter(
-                          (t) => t.status === Status.InProgress && t.week === 1,
+                          (t) =>
+                            t.status === Status.InProgress &&
+                            t.week === currentWeek,
                         )}
                       />
                     </MDBTabsPane>
                     <MDBTabsPane open={active === ActiveTab.tab3}>
+                      <TaskList
+                        tasks={returnFilteredTasks(
+                          topics,
+                          searchBoxValue,
+                        ).filter(
+                          (t) =>
+                            t.status === Status.Done && t.week === currentWeek,
+                        )}
+                      />
+                    </MDBTabsPane>
+                    <MDBTabsPane open={active === ActiveTab.tab4}>
                       <TaskList
                         tasks={returnFilteredTasks(
                           topics,

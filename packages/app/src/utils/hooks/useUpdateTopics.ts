@@ -6,7 +6,7 @@ export function useUpdateTopics() {
 
   return useMutation({
     mutationFn: updateToDo,
-    onSuccess: (savedTopic, updatedTopic) => {
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['topics'] });
     },
   });
@@ -25,3 +25,4 @@ function updateToDo(updatedTopic: TopicType): Promise<TopicType> {
     return res.json();
   });
 }
+

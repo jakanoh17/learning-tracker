@@ -6,9 +6,9 @@ export const Status = {
 
 type StatusType = (typeof Status)[keyof typeof Status];
 export type TopicType = {
-  id: number | string;
+  id: string;
   title: string;
-  week: number | Date | string;
+  week: number;
   status: StatusType;
   notes: string;
 };
