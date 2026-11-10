@@ -158,5 +158,37 @@
       "notes": "Broke it a lot along the way. Mapping out your variables really is a lot to consider. Removed the key from a React list and saw that it still rendered just with some errors."
     }
   ],
+  "questions": [
+    {
+      "id": "0",
+      "week": 2,
+      "question": "What's the difference between data from a server and state that only lives in the app?",
+      "answer": "Server data lives in the database, and the app only holds a cached copy that can go stale, so it has to be fetched, cached, refetched and kept in sync. In this app that's the topics and the current week, handled by TanStack Query. App-only state, like the search text, the active tab or which page is open, exists only in the browser and is owned by React (useState or context). Nothing outside the app can change it."
+    },
+    {
+      "id": "1",
+      "week": 2,
+      "question": "What's an optimistic update, and what happens when it fails?",
+      "answer": "You update the screen right away as if the save already worked, instead of waiting for the server. Here, clicking a status icon saves a snapshot of the topics, then writes the new status into the cache in onMutate. If the PUT fails, onError puts the snapshot back, so the task jumps back to its old tab. Either way, onSettled refetches to match the server."
+    },
+    {
+      "id": "2",
+      "week": 2,
+      "question": "What does an error boundary catch, and what doesn't it catch?",
+      "answer": "It catches errors thrown while rendering the components below it, including in lifecycle methods and constructors, and a useSuspenseQuery whose fetch fails. It doesn't catch errors in event handlers, in async code like setTimeout or a fetch in useEffect, in server-side rendering, or in the boundary itself. Mutation errors don't reach it unless you rethrow them during render."
+    },
+    {
+      "id": "3",
+      "week": 2,
+      "question": "Why would you load part of an app only when it's needed?",
+      "answer": "So the first load is smaller and faster. Code for a page the user might never open, like Stats or this Flashcards page, goes into its own chunk with lazy() and is only downloaded when it first renders. Suspense shows a fallback while that chunk loads."
+    },
+    {
+      "id": "4",
+      "week": 2,
+      "question": "What's a compound component? Show me yours.",
+      "answer": "A parent component plus child parts that share state through context, so you arrange the pieces however you like instead of passing lots of props. Mine is TopicCard: <TopicCard topic={task}> puts the topic and setStatus into context, and TopicCard.Header, TopicCard.Status and TopicCard.Notes read from it. TaskList puts Header and Status in one row and Notes underneath."
+    }
+  ],
   "$schema": "./node_modules/json-server/schema.json"
 }

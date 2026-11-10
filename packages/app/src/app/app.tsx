@@ -26,8 +26,15 @@ import SimulateErrorButton from '../components/SimulateErrorButton';
 import { useTopicsContext } from '../utils/hooks/TopicsContext';
 
 const Stats = lazy(() => import('../pages/Stats/Stats'));
+const Flashcards = lazy(() => import('../pages/Flashcards/Flashcards'));
 
-type PageType = 'tasks' | 'stats';
+const pages = {
+  tasks: 'Task List',
+  stats: 'Stats',
+  flashcards: 'Flashcards',
+} as const;
+
+type PageType = keyof typeof pages;
 
 export default function App() {
   const [active, setActive] = useState<ActiveTabType>(ActiveTab.tab1);
@@ -54,42 +61,36 @@ export default function App() {
                       alt="Check"
                       width="60"
                     />
-                    <h2 className="my-4">
-                      {page === 'tasks' ? 'Task List' : 'Stats'}
-                    </h2>
+                    <h2 className="my-4">{pages[page]}</h2>
                     <div className="d-flex justify-content-center mb-3">
                       <MDBBtnGroup className="shadow-0">
-                        <MDBBtn
-                          size="sm"
-                          color={page === 'tasks' ? 'primary' : 'light'}
-                          onClick={() => setPage('tasks')}
-                        >
-                          Tasks
-                        </MDBBtn>
-                        <MDBBtn
-                          size="sm"
-                          color={page === 'stats' ? 'primary' : 'light'}
-                          onClick={() => setPage('stats')}
-                        >
-                          Stats
-                        </MDBBtn>
+                        {(Object.keys(pages) as PageType[]).map((p) => (
+                          <MDBBtn
+                            key={p}
+                            size="sm"
+                            color={page === p ? 'primary' : 'light'}
+                            onClick={() => setPage(p)}
+                          >
+                            {p}
+                          </MDBBtn>
+                        ))}
                       </MDBBtnGroup>
                     </div>
-                    {page === 'tasks' && <HeaderDropdown />}
+                    {page !== 'stats' && <HeaderDropdown />}
                   </div>
-                  {page === 'stats' ? (
+                  {page !== 'tasks' ? (
                     <Suspense
                       fallback={
                         <div className="d-flex justify-content-center py-5">
                           <MDBSpinner role="status">
                             <span className="visually-hidden">
-                              Loading stats…
+                              Loading {pages[page]}…
                             </span>
                           </MDBSpinner>
                         </div>
                       }
                     >
-                      <Stats />
+                      {page === 'stats' ? <Stats /> : <Flashcards />}
                     </Suspense>
                   ) : (
                     <>
