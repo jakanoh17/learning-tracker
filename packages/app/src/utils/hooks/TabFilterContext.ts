@@ -1,4 +1,4 @@
-import { createContext } from 'react';
+import { createContext, useContext } from 'react';
 
 export const ActiveTab = {
   tab1: 'TAB1',
@@ -9,9 +9,25 @@ export const ActiveTab = {
 
 export type ActiveTabType = (typeof ActiveTab)[keyof typeof ActiveTab];
 
-const TabFilterContext = createContext({
-  activeTab: ActiveTab.tab1 as ActiveTabType,
-  setActiveTab: (value: ActiveTabType) => {},
-});
+type TabFilterContextType = {
+  activeTab: ActiveTabType;
+  setActiveTab: (value: ActiveTabType) => void;
+  search: string;
+  setSearch: (value: string) => void;
+};
+
+const TabFilterContext = createContext<TabFilterContextType | undefined>(
+  undefined,
+);
 
 export default TabFilterContext;
+
+export const useTabFilterContext = () => {
+  const context = useContext(TabFilterContext);
+  if (!context) {
+    throw new Error(
+      'useTabFilterContext must be used within a TabFilterContext provider',
+    );
+  }
+  return context;
+};

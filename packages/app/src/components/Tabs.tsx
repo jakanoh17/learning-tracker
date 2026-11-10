@@ -1,10 +1,12 @@
 import { MDBTabs, MDBTabsItem, MDBTabsLink } from 'mdb-react-ui-kit';
-import { useContext } from 'react';
-import TabFilterContext from '../utils/hooks/TabFilterContext';
-import { ActiveTab, type ActiveTabType } from '../utils/hooks/TabFilterContext';
+import {
+  ActiveTab,
+  type ActiveTabType,
+  useTabFilterContext,
+} from '../utils/hooks/TabFilterContext';
 
 export default function Tabs() {
-  const { activeTab, setActiveTab } = useContext(TabFilterContext);
+  const { activeTab, setActiveTab } = useTabFilterContext();
 
   const handleClick = (value: ActiveTabType) => {
     if (value === activeTab) {

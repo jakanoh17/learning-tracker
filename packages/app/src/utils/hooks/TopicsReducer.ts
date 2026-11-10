@@ -1,7 +1,14 @@
-import type { TopicType } from './topics';
+import type { StatusType, TopicType } from '../topics';
+
+type TopicsAction =
+  | { type: 'SET_STATUS'; payload: { id: string; status: StatusType } }
+  | { type: 'SET_NOTES'; payload: { id: string; notes: string } };
 
 // At this point this is just here as an example
-const TopicsReducer = (topicsState: TopicType[], action: any) => {
+const TopicsReducer = (
+  topicsState: TopicType[],
+  action: TopicsAction,
+): TopicType[] => {
   switch (action.type) {
     case 'SET_STATUS':
       return topicsState.map((topic) =>
@@ -15,8 +22,7 @@ const TopicsReducer = (topicsState: TopicType[], action: any) => {
           ? { ...topic, notes: action.payload.notes }
           : topic,
       );
-    default:
-      console.log(`Unknown action type: ${action.type}`);
-      return topicsState;
   }
 };
+
+export default TopicsReducer;

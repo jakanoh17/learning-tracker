@@ -1,17 +1,13 @@
-import { useRef, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
+// Returns `value` once it has stopped changing for `delay` ms
 export function useDebounce<T>(value: T, delay: number): T {
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const [debouncedValue, setDebouncedValue] = useState(value);
 
   useEffect(() => {
-    intervalRef.current = setInterval(() => {
-      intervalRef.current && clearInterval(intervalRef.current);
-      return;
-    }, delay);
-    return () => {
-      intervalRef.current && clearInterval(intervalRef.current);
-    };
-  }, [value]);
+    const timeout = setTimeout(() => setDebouncedValue(value), delay);
+    return () => clearTimeout(timeout);
+  }, [value, delay]);
 
-  return value;
+  return debouncedValue;
 }
