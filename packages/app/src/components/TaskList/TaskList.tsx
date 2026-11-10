@@ -1,7 +1,7 @@
 import { MDBIcon, MDBListGroup } from 'mdb-react-ui-kit';
 import TaskItem from './TaskItem/TaskItem';
-import { TopicType } from '../utils/topics';
-import { useUpdateTopics } from '../utils/hooks/useUpdateTopics';
+import { TopicType } from '../../utils/topics';
+import { useUpdateTopics } from '../../utils/hooks/useUpdateTopics';
 
 export default function TaskList({ tasks }: { tasks: TopicType[] }) {
   const updateMutation = useUpdateTopics();
@@ -19,7 +19,6 @@ export default function TaskList({ tasks }: { tasks: TopicType[] }) {
                 type="button"
                 icon="circle"
                 onClick={() => {
-                  // Handle click event for TODO status
                   updateMutation.mutate({ ...task, status: 'TODO' });
                 }}
               />
@@ -28,12 +27,18 @@ export default function TaskList({ tasks }: { tasks: TopicType[] }) {
                 className={task.status === 'INPROGRESS' ? 'text-warning' : ''}
                 type="button"
                 icon="adjust"
+                onClick={() => {
+                  updateMutation.mutate({ ...task, status: 'INPROGRESS' });
+                }}
               />
               <MDBIcon
                 fas
                 className={task.status === 'DONE' ? 'text-success' : ''}
                 type="button"
                 icon="check-circle"
+                onClick={() => {
+                  updateMutation.mutate({ ...task, status: 'DONE' });
+                }}
               />
             </div>
           </div>
