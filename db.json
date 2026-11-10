@@ -1,6 +1,6 @@
 {
   "currentWeek": {
-    "currentWeek": 2
+    "currentWeek": 4
   },
   "topics": [
     {
@@ -188,6 +188,66 @@
       "week": 2,
       "question": "What's a compound component? Show me yours.",
       "answer": "A parent component plus child parts that share state through context, so you arrange the pieces however you like instead of passing lots of props. Mine is TopicCard: <TopicCard topic={task}> puts the topic and setStatus into context, and TopicCard.Header, TopicCard.Status and TopicCard.Notes read from it. TaskList puts Header and Status in one row and Notes underneath."
+    },
+    {
+      "id": "5",
+      "week": 3,
+      "question": "What's a monorepo, and why would a company use one?",
+      "answer": "One git repository holding many projects, like several apps and the libraries they share. Companies use one so shared code changes in a single commit instead of being published and bumped across repos, everyone uses the same tooling and dependency versions, and a change that breaks another team's app shows up before it's merged. The cost is that builds and tests get slow without a tool like Nx to only run what's needed."
+    },
+    {
+      "id": "6",
+      "week": 3,
+      "question": "What's the difference between an app and a library in Nx?",
+      "answer": "An app is something you build and deploy on its own, like this learning-tracker React app, and it's where code gets put together. A library is a reusable piece of code that apps (or other libraries) import, like UI components, data hooks or utilities. Nx encourages thin apps and most code in libraries, so it can be shared, tested on its own and cached separately."
+    },
+    {
+      "id": "7",
+      "week": 3,
+      "question": "How does Nx know what's \"affected\" by a change?",
+      "answer": "It compares your files against a base commit (usually main) to see what changed, then works out which projects own those files. It uses the project graph, built by reading imports and package.json dependencies, to find every project that depends on those projects, directly or indirectly. Those are the affected ones, so nx affected -t test only tests them."
+    },
+    {
+      "id": "8",
+      "week": 3,
+      "question": "Why would you forbid some parts of the code from importing others?",
+      "answer": "To keep the architecture from tangling as the repo grows. For example, a shared UI library shouldn't import from one specific app, and one team's feature shouldn't reach into another team's internals. Nx does this with tags on projects and the @nx/enforce-module-boundaries lint rule, so a bad import fails lint instead of quietly creating a dependency that's hard to undo."
+    },
+    {
+      "id": "9",
+      "week": 3,
+      "question": "What is caching saving you, in plain terms?",
+      "answer": "Time spent redoing work you've already done. Before running a task like build or test, Nx hashes its inputs (the source files, config and dependencies). If it has run with exactly those inputs before, it replays the saved output and logs instead of running it again. With remote caching, a teammate or CI that already ran it can save you the run too."
+    },
+    {
+      "id": "10",
+      "week": 4,
+      "question": "Why test what the user sees instead of how the code works inside?",
+      "answer": "Because that's what actually has to keep working. A test that finds a button by its role and text and clicks it keeps passing when you refactor the inside, like swapping useState for useReducer, and fails only when the user would notice something broken. Tests that check internal state or which function was called break on every refactor, even when nothing is wrong for the user."
+    },
+    {
+      "id": "11",
+      "week": 4,
+      "question": "What's jsdom, and why do your tests need it? Name something it can't do.",
+      "answer": "jsdom is a JavaScript version of the browser's DOM that runs in Node. Tests run in Node, which has no document or window, so React Testing Library needs jsdom to render components and fire clicks. It doesn't do layout or painting: getBoundingClientRect returns zeros and CSS isn't applied, so it can't tell you whether the flip cards actually flip or whether the toggle is centered."
+    },
+    {
+      "id": "12",
+      "week": 4,
+      "question": "What's the difference between jest.fn, jest.spyOn, and jest.mock?",
+      "answer": "jest.fn() makes a new fake function you pass in yourself, like an onClick prop, and records how it was called. jest.spyOn(object, 'method') wraps a method that already exists, like fetch or console.error, so you can watch it or replace what it returns, and restore it afterwards. jest.mock('module') replaces a whole imported module for the test file. This project uses Vitest, where they're vi.fn, vi.spyOn and vi.mock."
+    },
+    {
+      "id": "13",
+      "week": 4,
+      "question": "When would you mock a whole module, and when would you fake the network with MSW instead?",
+      "answer": "Mock a module when it's something you don't want running in the test at all and the network isn't the point, like an analytics SDK, a date library or a heavy chart component. Use MSW when the code talks to an API: it intercepts the real requests, so your fetch code, error handling and TanStack Query hooks all run for real against fake responses. That catches bugs a mocked hook would hide, like forgetting to check res.ok."
+    },
+    {
+      "id": "14",
+      "week": 4,
+      "question": "Show me a bug one of your tests would catch.",
+      "answer": "TopicsErrorBoundary.spec.tsx makes the topics fetch return a 500, checks the \"Couldn't load topics\" card appears, clicks \"Try again\" and checks the topics load. If the boundary stopped calling TanStack's reset() before re-rendering, the query would stay in its error state, the card would never go away and the test would fail. It would also fail if useTopics stopped checking res.ok: the empty 500 response would blow up later in res.json() with a vague parse error instead of \"GET /topics failed: 500\", and the test checks for that message."
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
