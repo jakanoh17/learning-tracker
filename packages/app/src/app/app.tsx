@@ -8,8 +8,7 @@ import {
   MDBTabsContent,
   MDBTabsPane,
 } from 'mdb-react-ui-kit';
-import { Status, type TopicType } from '../utils/topics';
-import { useLocalStorage } from '../utils/useLocalStorage';
+import { Status } from '../utils/topics';
 import TaskList from '../TaskList/TaskList';
 import SearchBox from '../SearchBox/SearchBox';
 import returnFilteredTasks from '../utils/returnFilteredTasks';
@@ -18,15 +17,12 @@ import TabFilterContext, {
   ActiveTab,
   type ActiveTabType,
 } from '../utils/TabFilterContext';
-
-import { useTopics } from '../utils/useTopics';
+import { useTopicsContext } from '../utils/hooks/TopicsContext';
 
 export default function App() {
   const [active, setActive] = useState<ActiveTabType>(ActiveTab.tab1);
   const [searchBoxValue, setSearchBoxValue] = useState('');
-
-  const { data: topicsData } = useTopics();
-  const [storedTopics] = useLocalStorage<TopicType[]>('myKey', topicsData || []);
+  const { topics } = useTopicsContext();
 
   return (
     <TabFilterContext
@@ -58,7 +54,7 @@ export default function App() {
                     <MDBTabsPane open={active === ActiveTab.tab1}>
                       <TaskList
                         tasks={returnFilteredTasks(
-                          storedTopics,
+                          topics,
                           searchBoxValue,
                         ).filter(
                           (t) => t.status === Status.Todo && t.week === 1,
@@ -68,7 +64,7 @@ export default function App() {
                     <MDBTabsPane open={active === ActiveTab.tab2}>
                       <TaskList
                         tasks={returnFilteredTasks(
-                          storedTopics,
+                          topics,
                           searchBoxValue,
                         ).filter(
                           (t) => t.status === Status.InProgress && t.week === 1,
@@ -78,7 +74,7 @@ export default function App() {
                     <MDBTabsPane open={active === ActiveTab.tab3}>
                       <TaskList
                         tasks={returnFilteredTasks(
-                          storedTopics,
+                          topics,
                           searchBoxValue,
                         ).filter((t) => t.status === Status.Done)}
                       />

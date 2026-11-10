@@ -1,3 +1,4 @@
+// At this point this is just here as an example
 const TopicsReducer = (topicsState: any, action: any) => {
   switch (action.type) {
     case 'SET_STATUS':
