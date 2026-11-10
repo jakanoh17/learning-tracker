@@ -1,5 +1,5 @@
 import { useSuspenseQuery } from '@tanstack/react-query';
-import { TopicType } from './topics';
+import { TopicType } from '../topics';
 
 export function useTopics() {
   const { data } = useSuspenseQuery({
