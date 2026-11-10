@@ -1,10 +1,13 @@
-import { useState } from 'react';
+import { lazy, Suspense, useState } from 'react';
 import {
+  MDBBtn,
+  MDBBtnGroup,
   MDBCard,
   MDBCardBody,
   MDBCol,
   MDBContainer,
   MDBRow,
+  MDBSpinner,
   MDBTabsContent,
   MDBTabsPane,
 } from 'mdb-react-ui-kit';
@@ -21,11 +24,15 @@ import HeaderDropdown from '../components/HeaderDropdown';
 
 import { useTopicsContext } from '../utils/hooks/TopicsContext';
 
+const Stats = lazy(() => import('../pages/Stats/Stats'));
+
+type PageType = 'tasks' | 'stats';
+
 export default function App() {
   const [active, setActive] = useState<ActiveTabType>(ActiveTab.tab1);
   const [searchBoxValue, setSearchBoxValue] = useState('');
-  const { topics, currentWeek
-   } = useTopicsContext();
+  const [page, setPage] = useState<PageType>('tasks');
+  const { topics, currentWeek } = useTopicsContext();
 
   return (
     <TabFilterContext
@@ -46,58 +53,98 @@ export default function App() {
                       alt="Check"
                       width="60"
                     />
-                    <h2 className="my-4">Task List</h2>
-                    <HeaderDropdown />
+                    <h2 className="my-4">
+                      {page === 'tasks' ? 'Task List' : 'Stats'}
+                    </h2>
+                    <div className="d-flex justify-content-center mb-3">
+                      <MDBBtnGroup className="shadow-0">
+                        <MDBBtn
+                          size="sm"
+                          color={page === 'tasks' ? 'primary' : 'light'}
+                          onClick={() => setPage('tasks')}
+                        >
+                          Tasks
+                        </MDBBtn>
+                        <MDBBtn
+                          size="sm"
+                          color={page === 'stats' ? 'primary' : 'light'}
+                          onClick={() => setPage('stats')}
+                        >
+                          Stats
+                        </MDBBtn>
+                      </MDBBtnGroup>
+                    </div>
+                    {page === 'tasks' && <HeaderDropdown />}
                   </div>
-                  <SearchBox
-                    value={searchBoxValue}
-                    setValue={setSearchBoxValue}
-                  />
-                  <Tabs />
-                  <MDBTabsContent>
-                    <MDBTabsPane open={active === ActiveTab.tab1}>
-                      <TaskList
-                        tasks={returnFilteredTasks(
-                          topics,
-                          searchBoxValue,
-                        ).filter(
-                          (t) =>
-                            t.status === Status.Todo && t.week === currentWeek,
-                        )}
+                  {page === 'stats' ? (
+                    <Suspense
+                      fallback={
+                        <div className="d-flex justify-content-center py-5">
+                          <MDBSpinner role="status">
+                            <span className="visually-hidden">
+                              Loading stats…
+                            </span>
+                          </MDBSpinner>
+                        </div>
+                      }
+                    >
+                      <Stats />
+                    </Suspense>
+                  ) : (
+                    <>
+                      <SearchBox
+                        value={searchBoxValue}
+                        setValue={setSearchBoxValue}
                       />
-                    </MDBTabsPane>
-                    <MDBTabsPane open={active === ActiveTab.tab2}>
-                      <TaskList
-                        tasks={returnFilteredTasks(
-                          topics,
-                          searchBoxValue,
-                        ).filter(
-                          (t) =>
-                            t.status === Status.InProgress &&
-                            t.week === currentWeek,
-                        )}
-                      />
-                    </MDBTabsPane>
-                    <MDBTabsPane open={active === ActiveTab.tab3}>
-                      <TaskList
-                        tasks={returnFilteredTasks(
-                          topics,
-                          searchBoxValue,
-                        ).filter(
-                          (t) =>
-                            t.status === Status.Done && t.week === currentWeek,
-                        )}
-                      />
-                    </MDBTabsPane>
-                    <MDBTabsPane open={active === ActiveTab.tab4}>
-                      <TaskList
-                        tasks={returnFilteredTasks(
-                          topics,
-                          searchBoxValue,
-                        ).filter((t) => t.status === Status.Done)}
-                      />
-                    </MDBTabsPane>
-                  </MDBTabsContent>
+                      <Tabs />
+                      <MDBTabsContent>
+                        <MDBTabsPane open={active === ActiveTab.tab1}>
+                          <TaskList
+                            tasks={returnFilteredTasks(
+                              topics,
+                              searchBoxValue,
+                            ).filter(
+                              (t) =>
+                                t.status === Status.Todo &&
+                                t.week === currentWeek,
+                            )}
+                          />
+                        </MDBTabsPane>
+                        <MDBTabsPane open={active === ActiveTab.tab2}>
+                          <TaskList
+                            tasks={returnFilteredTasks(
+                              topics,
+                              searchBoxValue,
+                            ).filter(
+                              (t) =>
+                                t.status === Status.InProgress &&
+                                t.week === currentWeek,
+                            )}
+                          />
+                        </MDBTabsPane>
+                        <MDBTabsPane open={active === ActiveTab.tab3}>
+                          <TaskList
+                            tasks={returnFilteredTasks(
+                              topics,
+                              searchBoxValue,
+                            ).filter(
+                              (t) =>
+                                t.status === Status.Done &&
+                                t.week === currentWeek,
+                            )}
+                          />
+                        </MDBTabsPane>
+                        <MDBTabsPane open={active === ActiveTab.tab4}>
+                          <TaskList
+                            tasks={returnFilteredTasks(
+                              topics,
+                              searchBoxValue,
+                            ).filter((t) => t.status === Status.Done)}
+                          />
+                        </MDBTabsPane>
+                      </MDBTabsContent>
+                    </>
+                  )}
                 </MDBCardBody>
               </MDBCard>
             </MDBCol>
